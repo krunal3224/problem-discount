@@ -27,5 +27,11 @@ public class DiscountController {
 	public ResponseEntity<DiscountOutputDTO> calculateDiscount(@ModelAttribute @Valid DiscountInputDTO inputDTO) throws Exception {
 		return new ResponseEntity<DiscountOutputDTO>(discountService.calculateDiscount(inputDTO),HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/import", method = {RequestMethod.POST})
+	@ResponseBody
+	public ResponseEntity<DiscountOutputDTO> importDiscount(@ModelAttribute @Valid DiscountInputDTO inputDTO) throws Exception {
+		return new ResponseEntity<DiscountOutputDTO>(discountService.calculateDiscount(inputDTO),HttpStatus.OK);
+	}
 
 }

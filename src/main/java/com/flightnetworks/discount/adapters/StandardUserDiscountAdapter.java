@@ -13,15 +13,17 @@ public class StandardUserDiscountAdapter implements DiscountAdapter {
 	 */
 	@Override
 	public BigDecimal calculateDiscount(BigDecimal amount) {
-		if (amount.compareTo(slab5000) >= 0) {
-			return new BigDecimal(20);
-		} else if (amount.compareTo(slab3000) >= 0 && amount.compareTo(slab5000) < 0) {
-			return new BigDecimal(15);
-		} else if (amount.compareTo(slab1000) >= 0 && amount.compareTo(slab3000) < 0) {
-			return new BigDecimal(10);
-		} else {
-			return BigDecimal.ZERO;
+		BigDecimal discount = BigDecimal.ZERO;
+		if (amount.compareTo(slab1000) >= 0) {
+			discount = discount.add(new BigDecimal((amount.subtract(slab1000).doubleValue() * 10) / 100));
 		}
+		if (amount.compareTo(slab3000) >= 0) {
+			discount = discount.add(new BigDecimal((amount.subtract(slab3000).doubleValue() * 15) / 100));
+		}
+		if (amount.compareTo(slab5000) >= 0) {
+			discount.add(new BigDecimal((amount.subtract(slab5000).doubleValue() * 20) / 100));
+		}
+		return discount;
 	}
 
 }
